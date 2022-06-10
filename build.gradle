@@ -2,7 +2,7 @@
  * 프로젝트의 플러그인 의존성 관리를 위한 설정
  */
 plugins {
-    id 'org.springframework.boot' version '2.4.1' // 스프링 부트 그레이들 플러그인 2.4.1 버전
+    id 'org.springframework.boot' version '2.6.6' // 스프링 부트 그레이들 플러그인 2.6.6 버전
     id 'io.spring.dependency-management' version '1.0.10.RELEASE' // 스프링 부트의 의존성들을 관리해주는 플러그인
     id 'java'
 }
