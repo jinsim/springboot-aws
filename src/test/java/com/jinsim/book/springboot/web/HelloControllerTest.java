@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = HelloController.class)
 // Web(Spring MVC)에 집중할 수 있는 애너테이션. 컨트롤러 하나를 테스트할 때 주로 사용됨
@@ -33,6 +33,21 @@ class HelloControllerTest {
                 // HTTP Header의 Status를 검증한다.(200 404 등 상태 검증, 여기선 200인지 검증)
                 .andExpect(content().string(hello));
                 // 응답 본문의 내용을 검증한다. HelloController에서 "hello"를 반환하는지 검증한다.
+    }
+
+    @Test
+    void helloDto가_리턴된다() throws Exception {
+        String name = "hello";
+        int amount = 1000;
+
+        mvc.perform(get("/hello/dto")
+                .param("name", name)
+                // param은 API 테스트할 때 사용될 요청 파라미터를 설정한다.(String만 가능)
+                .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(name)))
+                // jsonPath는 JSON 응답값을 필드별로 검증할 수 있는 메서드로, $를 기준으로 필드명을 명시한다.
+                .andExpect(jsonPath("$.amount", is(amount)));
     }
 
 }
