@@ -27,6 +27,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
     // 웹에 관련된 의존성 관리. json이나 tomcat등이 들어있다.
     implementation('org.springframework.boot:spring-boot-starter-web')
     // 테스트를 위한 라이브러리가 들어있다.
@@ -37,6 +38,13 @@ dependencies {
     annotationProcessor('org.projectlombok:lombok')
     testImplementation('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
+
+    // 스프링 부트용 Spring Data Jpa 추상화 라이브러리이다. 자동으로 JPA 관련 라이브러리들의 버전을 관리해준다.
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // h2 데이터베이스 사용을 위한 라이브러리이다. H2는 인메모리 관계형 데이터베이스로, 교육용으로 많이 사용된다.
+    // runtimeOnly로 런타임시에만 의존성을 추가해준다.
+    runtimeOnly 'com.h2database:h2'
 }
 
 /**
