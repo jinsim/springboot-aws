@@ -1,11 +1,11 @@
 package com.jinsim.book.springboot.web;
 
 import com.jinsim.book.springboot.service.PostsService;
+import com.jinsim.book.springboot.web.dto.PostsResponseDto;
 import com.jinsim.book.springboot.web.dto.PostsSaveRequestDto;
+import com.jinsim.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 // final이 선언된 모든 필드를 인자값으로 가지는 생성자를 자동 생성해준다.
@@ -20,4 +20,13 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
+    @PutMapping("/api/v1/posts/{id}")
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+        return postsService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public PostsResponseDto findById(@PathVariable Long id) {
+        return postsService.findById(id);
+    }
 }
