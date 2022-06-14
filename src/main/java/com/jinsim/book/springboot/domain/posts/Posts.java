@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter // 클래스 내 모든 필드의 Getter 메서드 자동 생성
 @NoArgsConstructor // 기본 생성자 자동 추가 (public Posts() {} 와 같음)
@@ -17,7 +14,7 @@ public class Posts {
     // JPA를 사용하면 직접 DB에 쿼리를 날리기보다, Entity 클래스 수정을 통해 작업한다.
 
     @Id // 해당 테이블의 PK
-    @GeneratedValue // PK 생성 규칙
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // PK 생성 규칙
     private Long id;
 
     @Column(length = 500, nullable = false)
