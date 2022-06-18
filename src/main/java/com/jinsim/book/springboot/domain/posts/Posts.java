@@ -1,5 +1,6 @@
 package com.jinsim.book.springboot.domain.posts;
 
+import com.jinsim.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter // 클래스 내 모든 필드의 Getter 메서드 자동 생성
 @NoArgsConstructor // 기본 생성자 자동 추가 (public Posts() {} 와 같음)
 @Entity // 테이블과 링크된 클래스.
-public class Posts {
+public class Posts extends BaseTimeEntity {
     // DB 테이블과 매칭된 클래스. Entity 클래스
     // JPA를 사용하면 직접 DB에 쿼리를 날리기보다, Entity 클래스 수정을 통해 작업한다.
 
