@@ -3,7 +3,7 @@ package com.jinsim.book.springboot.web;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,14 +11,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IndexControllerTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private WebTestClient webTestClient;
 
     @Test
     void 메인_페이지_로딩() {
-        //when
-        String body = this.restTemplate.getForObject("/", String.class);
-
-        //then
-        assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+        webTestClient.get().uri("/")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .value(body->{
+                    assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+                });
     }
 }
