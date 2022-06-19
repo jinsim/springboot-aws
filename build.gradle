@@ -32,6 +32,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     // 테스트를 위한 라이브러리가 들어있다.
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    // Mustache 의존성 등록
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
 
     // Lombok
     implementation('org.projectlombok:lombok')
