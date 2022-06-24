@@ -4,7 +4,7 @@ var main = {
         $('#btn-save').on('click', function () {
             _this.save();
         });
-        $('#btn-update').on('click', function () { //(1)
+        $('#btn-update').on('click', function () {
             _this.update();
         });
     },
@@ -28,7 +28,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    update : function () { //(2)
+    update : function () {
         var data = {
             title: $('#title').val(),
             content: $('#content').val()
@@ -37,8 +37,8 @@ var main = {
         var id = $('#id').val();
 
         $.ajax({
-            type: 'PUT', //(3)
-            url: '/api/v1/posts/'+id, //(4)
+            type: 'PUT',
+            url: '/api/v1/posts/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
