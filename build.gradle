@@ -49,6 +49,9 @@ dependencies {
     // h2 데이터베이스 사용을 위한 라이브러리이다. H2는 인메모리 관계형 데이터베이스로, 교육용으로 많이 사용된다.
     // runtimeOnly로 런타임시에만 의존성을 추가해준다.
     runtimeOnly 'com.h2database:h2'
+
+    // 스프링 시큐리티 관련 의존성. 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
 }
 
 /**
