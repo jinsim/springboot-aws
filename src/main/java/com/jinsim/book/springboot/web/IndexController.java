@@ -1,5 +1,6 @@
 package com.jinsim.book.springboot.web;
 
+import com.jinsim.book.springboot.config.auth.LoginUser;
 import com.jinsim.book.springboot.config.auth.dto.SessionUser;
 import com.jinsim.book.springboot.domain.posts.PostsRepository;
 import com.jinsim.book.springboot.service.PostsService;
@@ -20,10 +21,9 @@ public class IndexController {
     private final HttpSession httpSession; // 새로 추가
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
 
-        // 새로 추가
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
