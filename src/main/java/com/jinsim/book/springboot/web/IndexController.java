@@ -2,7 +2,6 @@ package com.jinsim.book.springboot.web;
 
 import com.jinsim.book.springboot.config.auth.LoginUser;
 import com.jinsim.book.springboot.config.auth.dto.SessionUser;
-import com.jinsim.book.springboot.domain.posts.PostsRepository;
 import com.jinsim.book.springboot.service.PostsService;
 import com.jinsim.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -11,20 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
-
 @RequiredArgsConstructor // final이 붙은 필드의 생성자 자동 생성
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession; // 새로 추가
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
