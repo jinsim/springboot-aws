@@ -20,7 +20,7 @@ class IndexControllerTest {
                 .expectStatus().isOk()
                 .expectBody(String.class)
                 .value(body->{
-                    assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+                    assertThat(body).contains("스프링부트로 시작하는 웹 서비스");
                 });
     }
 }
