@@ -1,19 +1,26 @@
 package com.jinsim.book.springboot.web;
 
+import com.jinsim.book.springboot.config.auth.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = HelloController.class)
+@WebMvcTest(controllers = HelloController.class,
+        excludeFilters = {
+            @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                    classes = SecurityConfig.class)
+        })
 // Web(Spring MVC)에 집중할 수 있는 애너테이션. 컨트롤러 하나를 테스트할 때 주로 사용됨
 // 내부에 @ExtendWith(SpringExtension.class)가 적용되어 있다.
 class HelloControllerTest {
-    // 클래스 및 메서드에 public 생략 가능
 
     @Autowired
     // 스프링이 관리하는 빈을 주입 받는다.
@@ -21,6 +28,7 @@ class HelloControllerTest {
     // 서블릿을 Mocking한 객체로, 웹 API를 테스트할 때 사용한다.
     // 이 클래스를 통해 HTTP Get, Post 등에 대한 API 테스트를 할 수 있다.
 
+    @WithMockUser(roles = "USER")
     @Test
     // 해당 메서드가 테스트 메서드임을 명시한다.
     void hello가_리턴된다() throws Exception {
@@ -35,6 +43,7 @@ class HelloControllerTest {
                 // 응답 본문의 내용을 검증한다. HelloController에서 "hello"를 반환하는지 검증한다.
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     void helloDto가_리턴된다() throws Exception {
         String name = "hello";
